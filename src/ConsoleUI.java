@@ -33,9 +33,13 @@ public class ConsoleUI {
     private void borrowBook() {
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
         int bookId = Integer.parseInt(IO.readln("Indtast bogens ID: "));
-        boolean succesLoan = library.loanBook(memberId, bookId);
-
-        IO.println(succesLoan ? "Bogen er lånt!" : "Bogen kunne ikke lånes");
+        AttemptLoan loanAttempt = library.loanBook(memberId, bookId);
+            switch (loanAttempt){
+                case RES_NOT_FOUND -> IO.println("Not found");
+                case USER_NOT_FOUND ->  IO.println("This user does not exist");
+                case RES_NOT_AVAIL -> IO.println(bookId + "is not currently available");
+                case RES_LOAN_SUCCESS ->  IO.println(bookId + "has be registered as a loan to " + memberId);
+            }
     }
 
     private void returnBook() {
