@@ -29,7 +29,7 @@ public class Library {
 
     public Book getBook(int bookId) { //Metode til at finde bøger i bookList med bookId
         for (Book book : bookList) {
-            if (book.id() == bookId) {
+            if (book.id == bookId) {
                 return book;
             }
         }
@@ -38,7 +38,7 @@ public class Library {
 
     public Loan getLoan(int bookId) { //Metode til at finde lån i loanList
         for (Loan loan : loanList) {
-            if (loan.book().id() == bookId) {
+            if (loan.book().id == bookId) {
                 return loan;
             }
         } return null;
