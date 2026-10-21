@@ -6,7 +6,7 @@ public class Library {
     private final ArrayList<Member> memberList = new ArrayList<>();
     private final ArrayList<Loan> loanList = new ArrayList<>();
 
-    public void addResource(Resource resource) { //Metode til at tilføje bøger i bookList ArrayListen
+    public void addResource(Resource resource) { //Metode til at tilføje resources i resourceList ArrayListen
         resourceList.add(resource);
     }
 
@@ -27,7 +27,7 @@ public class Library {
         return null;
     }
 
-    public Resource getResource(String identifier) { //Metode til at finde bøger i bookList med bookId
+    public Resource getResource(String identifier) { //Metode til at finde resources i resourceList med identifier
         for (Resource resource : resourceList) {
             if (resource.identifier.equals(identifier)) {
                 return resource;
@@ -45,7 +45,7 @@ public class Library {
 
     }
 
-    public void printBooks() { //Metode til at printe bøger fra bookList
+    public void printBooks() { //Metode til at printe resources fra resourceList
         for (int i = 0; i < resourceList.size(); i++) {
             IO.println(resourceList.get(i));
         }
@@ -57,8 +57,8 @@ public class Library {
         }
     }
 
-    public AttemptLoan loanResource(int memberId, String identifier) { //Metode til at låne en bog, hvis både medlem og bog er oprrettet i ArrayListerne
-        // og bogen ikke er på låne listen i forvejen.
+    public AttemptLoan loanResource(int memberId, String identifier) { //Metode til at låne en resource, hvis både medlem og resource er oprrettet i ArrayListerne
+        // og resourcen ikke er på låne listen i forvejen.
         Member member = getMember(memberId);
         if (member == null) {
             return AttemptLoan.USER_NOT_FOUND;
@@ -77,7 +77,7 @@ public class Library {
     }
 
 
-    public boolean returnResource(String identifier){ //Metode til at fjerne en bog fra loanList
+    public boolean returnResource(String identifier){ //Metode til at fjerne en resource fra loanList
         Loan loan = getLoan(identifier);
         if (loan == null){
             return false;
