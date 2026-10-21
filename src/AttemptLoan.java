@@ -1,0 +1,2 @@
+public enum AttemptLoan { USER_NOT_FOUND, RES_NOT_FOUND, RES_NOT_AVAIL, RES_LOAN_SUCCESS
+}

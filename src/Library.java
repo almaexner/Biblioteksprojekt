@@ -57,22 +57,22 @@ public class Library {
         }
     }
 
-    public boolean loanBook(int memberId, int bookId) { //Metode til at låne en bog, hvis både medlem og bog er oprrettet i ArrayListerne
+    public AttemptLoan loanBook(int memberId, int bookId) { //Metode til at låne en bog, hvis både medlem og bog er oprrettet i ArrayListerne
         // og bogen ikke er på låne listen i forvejen.
         Member member = getMember(memberId);
         if (member == null) {
-            return false;
+            return AttemptLoan.USER_NOT_FOUND;
         }
         Book book = getBook(bookId);
         if (book == null) {
-            return false;
+            return AttemptLoan.RES_NOT_FOUND;
         }
         Loan loan = getLoan(bookId);
         if (loan != null){
-            return false;
+            return AttemptLoan.RES_NOT_AVAIL;
         }
         loanList.add(new Loan(book, member, LocalDate.now()));
-        return true;
+        return AttemptLoan.RES_LOAN_SUCCESS;
     }
 
 
