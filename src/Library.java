@@ -36,9 +36,9 @@ public class Library {
         return null;
     }
 
-    public Loan getLoan(int bookId) { //Metode til at finde lån i loanList
+    public Loan getLoan(int identifier) {
         for (Loan loan : loanList) {
-            if (loan.book().id == bookId) {
+            if (loan.getBook().id == identifier) {
                 return loan;
             }
         } return null;
@@ -89,7 +89,7 @@ public class Library {
         ArrayList<Loan> foundLoans = new ArrayList<>();
 
         for (Loan loan : loanList){
-            if (loan.member().memberNo() == memberId){
+            if (loan.getMember().memberNo() == memberId){
                 foundLoans.add(loan);
             }
         }
