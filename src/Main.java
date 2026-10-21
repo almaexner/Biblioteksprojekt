@@ -10,9 +10,9 @@ void main() {
     Member member2 = new Member("Hans Hansen", 11);
     Member member3 = new Member("Jens Jensen", 12);
 
-    library.addBook(book1);
-    library.addBook(book2);
-    library.addBook(book3);
+    library.addResource(book1);
+    library.addResource(book2);
+    library.addResource(book3);
 
     library.addMember(member1);
     library.addMember(member2);

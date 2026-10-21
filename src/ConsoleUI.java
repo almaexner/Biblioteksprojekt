@@ -13,8 +13,8 @@ public class ConsoleUI {
             showMenu();
             int userInput = Integer.parseInt(IO.readln("Indtast dit valg:"));
             switch (userInput) {
-                case 1 -> borrowBook();
-                case 2 -> returnBook();
+                case 1 -> borrowResource();
+                case 2 -> returnMaterial();
                 case 3 -> showLoans();
                 case 0 -> isRunning = false;
                 default -> IO.println("Ugyldigt input. Prøv igen.");
@@ -30,23 +30,23 @@ public class ConsoleUI {
                 "0. Afslut \n");
     }
 
-    private void borrowBook() {
+    private void borrowResource() {
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
-        int bookId = Integer.parseInt(IO.readln("Indtast bogens ID: "));
-        AttemptLoan loanAttempt = library.loanBook(memberId, bookId);
-            switch (loanAttempt){
-                case RES_NOT_FOUND -> IO.println("Not found");
-                case USER_NOT_FOUND ->  IO.println("This user does not exist");
-                case RES_NOT_AVAIL -> IO.println(bookId + "is not currently available");
-                case RES_LOAN_SUCCESS ->  IO.println(bookId + "has be registered as a loan to " + memberId);
-            }
+        String identifier = IO.readln("Indtast materialets ID: ");
+        AttemptLoan loanAttempt = library.loanResource(memberId, identifier);
+        switch (loanAttempt) {
+            case RES_NOT_FOUND -> IO.println("Not found");
+            case USER_NOT_FOUND -> IO.println("This user does not exist");
+            case RES_NOT_AVAIL -> IO.println(identifier + "is not currently available");
+            case RES_LOAN_SUCCESS -> IO.println(identifier + "has be registered as a loan to " + memberId);
+        }
     }
 
-    private void returnBook() {
-        int bookId = Integer.parseInt(IO.readln("Indtast bogens ID: "));
-        boolean succesReturn = library.returnBook(bookId);
+    private void returnMaterial() {
+        String identifier = IO.readln("Indtast materialets ID: ");
+        boolean succesReturn = library.returnResource(identifier);
 
-        IO.println(succesReturn ? "Bogen er nu returneret" : "Bogen kunne ikke returneres");
+        IO.println(succesReturn ? "Materialet er nu returneret" : "Materialet kunne ikke returneres");
     }
 
     private void showLoans() {

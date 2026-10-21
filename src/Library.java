@@ -2,12 +2,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Library {
-    private final ArrayList<Book> bookList = new ArrayList<>();
+    private final ArrayList<Resource> resourceList = new ArrayList<>();
     private final ArrayList<Member> memberList = new ArrayList<>();
     private final ArrayList<Loan> loanList = new ArrayList<>();
 
-    public void addBook(Book book) { //Metode til at tilføje bøger i bookList ArrayListen
-        bookList.add(book);
+    public void addResource(Resource resource) { //Metode til at tilføje bøger i bookList ArrayListen
+        resourceList.add(resource);
     }
 
     public void addMember(Member member) { //Metode til at tilføje medlemmer i memberList ArrayListen
@@ -27,18 +27,18 @@ public class Library {
         return null;
     }
 
-    public Book getBook(int bookId) { //Metode til at finde bøger i bookList med bookId
-        for (Book book : bookList) {
-            if (book.id == bookId) {
-                return book;
+    public Resource getResource(String identifier) { //Metode til at finde bøger i bookList med bookId
+        for (Resource resource : resourceList) {
+            if (resource.identifier.equals(identifier)) {
+                return resource;
             }
         }
         return null;
     }
 
-    public Loan getLoan(int identifier) {
+    public Loan getLoan(String identifier) {
         for (Loan loan : loanList) {
-            if (loan.getBook().id == identifier) {
+            if (loan.getResource().identifier.equals(identifier)) {
                 return loan;
             }
         } return null;
@@ -46,8 +46,8 @@ public class Library {
     }
 
     public void printBooks() { //Metode til at printe bøger fra bookList
-        for (int i = 0; i < bookList.size(); i++) {
-            IO.println(bookList.get(i));
+        for (int i = 0; i < resourceList.size(); i++) {
+            IO.println(resourceList.get(i));
         }
     }
 
@@ -57,27 +57,28 @@ public class Library {
         }
     }
 
-    public AttemptLoan loanBook(int memberId, int bookId) { //Metode til at låne en bog, hvis både medlem og bog er oprrettet i ArrayListerne
+    public AttemptLoan loanResource(int memberId, String identifier) { //Metode til at låne en bog, hvis både medlem og bog er oprrettet i ArrayListerne
         // og bogen ikke er på låne listen i forvejen.
         Member member = getMember(memberId);
         if (member == null) {
             return AttemptLoan.USER_NOT_FOUND;
         }
-        Book book = getBook(bookId);
-        if (book == null) {
+        Resource resource = getResource(identifier);
+        if (resource == null) {
             return AttemptLoan.RES_NOT_FOUND;
         }
-        Loan loan = getLoan(bookId);
+
+        Loan loan = getLoan(identifier);
         if (loan != null){
             return AttemptLoan.RES_NOT_AVAIL;
         }
-        loanList.add(new Loan(book, member, LocalDate.now()));
+        loanList.add(new Loan(resource, member, LocalDate.now()));
         return AttemptLoan.RES_LOAN_SUCCESS;
     }
 
 
-    public boolean returnBook(int bookId){ //Metode til at fjerne en bog fra loanList
-        Loan loan = getLoan(bookId);
+    public boolean returnResource(String identifier){ //Metode til at fjerne en bog fra loanList
+        Loan loan = getLoan(identifier);
         if (loan == null){
             return false;
         }
