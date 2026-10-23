@@ -20,7 +20,7 @@ public class Library {
 
     public Member getMember(int memberId) { //Metode til at finde medlemmer i ArrayListen for medlemmer med brug af memberId
         for (Member member : memberList) {
-            if (member.memberNo() == memberId) {
+            if (member.getID() == memberId) {
                 return member;
             }
         }
@@ -90,7 +90,7 @@ public class Library {
         ArrayList<Loan> foundLoans = new ArrayList<>();
 
         for (Loan loan : loanList){
-            if (loan.getMember().memberNo() == memberId){
+            if (loan.getMember().getID() == memberId){
                 foundLoans.add(loan);
             }
         }
