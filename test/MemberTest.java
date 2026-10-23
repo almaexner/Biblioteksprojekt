@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,6 +34,11 @@ public class MemberTest {
 
         //Assert
         assertEquals(member1.getName() + " (Lånernummer: " + member1.getID() + ")", member1.toString());
+
+    }
+
+    @Test
+    void aBookLoanedAWeekAgoIsDueInAWeek(){
 
     }
 
