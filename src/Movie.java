@@ -2,19 +2,10 @@ public class Movie extends Resource {
     final String instructor;
     final int lengthMin;
 
-    public Movie (String studio, String title, String EAN, String instructor, int lengthMin) {
-        super(studio, title, EAN);
+    public Movie (String creator, String title, String identifier, String instructor, int lengthMin) {
+        super(creator, title, identifier);
         this.instructor = instructor;
         this.lengthMin = lengthMin;
 
     }
-
-    public String getStudio() {
-        return creator;
-    }
-
-    public String getEAN(){
-        return identifier;
-    }
-
 }
