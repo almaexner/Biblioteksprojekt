@@ -1,16 +1,8 @@
 public class VideoGame extends Resource {
     final String platform;
 
-    public VideoGame (String studio, String title, String EAN, String platform) {
-        super(studio, title, EAN);
+    public VideoGame (String creator, String title, String identifier, String platform) {
+        super(creator, title, identifier);
         this.platform = platform;
-    }
-
-    public String getStudio(){
-        return creator;
-    }
-
-    public String getEAN(){
-        return identifier;
     }
 }

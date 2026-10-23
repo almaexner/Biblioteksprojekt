@@ -8,4 +8,16 @@ public class Resource {
         this.title = title;
         this.identifier = identifier;
     }
+
+    public String getCreator(){
+        return creator;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public String getIdentifier(){
+        return identifier;
+    }
 }
