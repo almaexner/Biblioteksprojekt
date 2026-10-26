@@ -22,8 +22,8 @@ public class BookTest {
         //Act
         String creator = book.getCreator();
         //Assert
-        assertTrue(creator == book.getCreator());
-        assertTrue(creator == "Allan B. Downey");
+        assertSame(creator, book.getCreator());
+        assertSame("Allan B. Downey", creator);
     }
 
     @Test
