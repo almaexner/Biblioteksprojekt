@@ -5,6 +5,11 @@ public class Library {
     private final ArrayList<Resource> resourceList = new ArrayList<>();
     private final ArrayList<Member> memberList = new ArrayList<>();
     private final ArrayList<Loan> loanList = new ArrayList<>();
+    LoanPolicy loanPolicy;
+
+    public Library (LoanPolicy loanPolicy){
+        this.loanPolicy = loanPolicy;
+    }
 
     public void addResource(Resource resource) { //Metode til at tilføje resources i resourceList ArrayListen
         resourceList.add(resource);
@@ -42,6 +47,11 @@ public class Library {
                 return loan;
             }
         } return null;
+
+    }
+
+    public LocalDate getDueDate(LocalDate borrowedDate){
+        return loanPolicy.calculateDueDate(borrowedDate);
 
     }
 
