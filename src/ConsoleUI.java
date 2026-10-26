@@ -16,6 +16,7 @@ public class ConsoleUI {
                 case 1 -> borrowResource();
                 case 2 -> returnMaterial();
                 case 3 -> showLoans();
+                case 4 -> createUser();
                 case 0 -> isRunning = false;
                 default -> IO.println("Ugyldigt input. Prøv igen.");
             }
@@ -27,6 +28,7 @@ public class ConsoleUI {
                 "1. Lån \n" +
                 "2. Aflever \n" +
                 "3. Vis alle lån \n" +
+                "4. NewUser \n" +
                 "0. Afslut \n");
     }
 
@@ -55,5 +57,9 @@ public class ConsoleUI {
         for (Loan loan : memberLoans) {
             IO.println(loan);
         }
+    }
+    public void createUser() {
+        Member member = new Member(IO.readln("New Username: "), Integer.parseInt(IO.readln("New userID: ")));
+        library.addMember(member);
     }
 }
