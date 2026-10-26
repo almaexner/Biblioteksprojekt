@@ -38,6 +38,23 @@ public class LoanTest {
     }
 
     @Test
+    void testGetResourceFalse(){
+//Arrange
+        Resource resource = new Resource("J.K. Rowling", "Harry Potter and the philosophers stone", "9781408855652");
+        Member member1 = new Member("Alma Exner", 10);
+        Loan loan = new Loan(resource, member1, borrowedDate);
+
+        //Act
+
+
+        //Assert
+        assertEquals(loan.getResource().getCreator(), "I.B. Growling");
+        assertEquals(loan.getResource().getTitle(), "Garry Bodder and the Diagonogoler's Sdone");
+        assertEquals(loan.getResource().getIdentifier(), "9682623191");
+    }
+
+
+    @Test
     void testGetDueDate(){
         //Arrange
         Resource resource = new Resource("J.K. Rowling", "Harry Potter and the philosophers stone", "9781408855652");
@@ -50,6 +67,7 @@ public class LoanTest {
         //Assert
         assertEquals(loan.getDueDate(), borrowedDate);
     }
+
     @Test
     void testToString(){
         //Arrange
@@ -58,6 +76,30 @@ public class LoanTest {
         Loan loan = new Loan(resource, member1, borrowedDate);
         //Act
         String toString = loan.toString();
+        //Assert
+        assertEquals(resource + "\n" + member1 + "\n" + "Afleveringsfrist: " + borrowedDate, toString);
+    }
+
+    @Test
+    void testToStringFalse(){
+        //Arrange
+        Resource resource = new Resource("J.K. Rowling", "Harry Potter and the philosophers stone", "9781408855652");
+        Member member1 = new Member("Alma Exner", 10);
+        Loan loan = new Loan(resource, member1, borrowedDate);
+        //Act
+        String toString = member1.toString();
+        //Assert
+        assertEquals(resource + "\n" + member1 + "\n" + "Afleveringsfrist: " + borrowedDate, toString);
+    }
+
+    @Test
+    void testToStringFalse2(){
+        //Arrange
+        Resource resource = new Resource("J.K. Rowling", "Harry Potter and the philosophers stone", "9781408855652");
+        Member member1 = new Member("Alma Exner", 10);
+        Loan loan = new Loan(resource, member1, borrowedDate);
+        //Act
+        String toString = resource.toString();
         //Assert
         assertEquals(resource + "\n" + member1 + "\n" + "Afleveringsfrist: " + borrowedDate, toString);
     }
