@@ -27,6 +27,16 @@ public class BookTest {
     }
 
     @Test
+    void testGetCreatorFalse(){
+        //Arrange
+        Book book = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
+        //Act
+        String creator = book.getCreator();
+        //Assert
+        assertTrue(creator == "Allen G. Bowney");
+    }
+
+    @Test
     void testToString(){
         //Arrange
         Book book = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
@@ -34,6 +44,16 @@ public class BookTest {
         String toString = book.toString();
         //Assert
         assertEquals("Allan B. Downey; Think Java; 9781492072508", toString);
+    }
+
+    @Test
+    void testToStringFalse(){
+        //Arrange
+        Book book = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
+        //Act
+        String toString = book.toString();
+        //Assert
+        assertEquals("Allan B. Downey Think Java 9781492072508", toString);
     }
 
     @Test
@@ -60,6 +80,16 @@ public class BookTest {
         Book book = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
         //Act
         Book book2 = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
+        //Assert
+        assertTrue(book.equals(book2));
+    }
+
+    @Test
+    void testEqualsFalse(){
+        //Arrange
+        Book book = new Book("Allan B. Downey", "Think Java", "9781492072508", 250);
+        //Act
+        Book book2 = new Book("J.k. Rowling", "Think Java", "9781492072508", 250);
         //Assert
         assertTrue(book.equals(book2));
     }

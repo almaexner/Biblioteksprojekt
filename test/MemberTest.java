@@ -14,6 +14,15 @@ public class MemberTest {
         //Assert
         assertTrue("Alma Exner" == member1.getName());
     }
+    @Test
+    void testGetMemberFalse(){
+        //Arrange
+        var member1 = new Member("Alma Exner", 10);
+        //Act
+
+        //Assert
+        assertTrue("" == member1.getName());
+    }
 
     @Test
     void testGetID(){
@@ -26,6 +35,16 @@ public class MemberTest {
     }
 
     @Test
+    void testGetIDFalse(){
+        //Arrange
+        var member1 = new Member("Alma Exner", 10);
+        //Act
+
+        //Assert
+        assertTrue(0 == member1.getID());
+    }
+
+    @Test
     void testToString(){
         //Arrange
         var member1 = new Member("Alma Exner", 10);
@@ -33,6 +52,18 @@ public class MemberTest {
 
         //Assert
         assertEquals(member1.getName() + " (Lånernummer: " + member1.getID() + ")", member1.toString());
+
+    }
+
+    @Test
+    void testToStringFalse(){
+        //Arrange
+        var member1 = new Member("Alma Exner", 10);
+        var member2 = new Member("", 0);
+        //Act
+
+        //Assert
+        assertEquals(member1.getName() + " (Lånernummer: " + member1.getID() + ")", member2.toString());
 
     }
 
