@@ -1,6 +1,7 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public interface LoanPolicy {
-    boolean canLoan ();
-    LocalDate calculateDueDate(LocalDate borrowedDate);
+    boolean canLoan (Resource resource, ArrayList<Loan> memberLoanList);
+    LocalDate calculateDueDate(LocalDate borrowedDate, Resource resource);
 }

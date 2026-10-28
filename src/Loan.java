@@ -3,12 +3,14 @@ import java.time.LocalDate;
 public class Loan {
     final private Resource resource;
     final private Member member;
-    final LocalDate borrowedDate;
+    final LocalDate borrowedDate; //Dagen materialet bliver lånt
+    final LocalDate dueDate; //Dagen materialet senest skal returneres
 
-    public Loan(Resource resource, Member member, LocalDate borrowedDate) {
+    public Loan(Resource resource, Member member, LocalDate borrowedDate, LocalDate dueDate) {
         this.resource = resource;
         this.member = member;
         this.borrowedDate = borrowedDate;
+        this.dueDate = dueDate;
     }
 
     public Resource getResource() {
@@ -20,10 +22,7 @@ public class Loan {
     }
 
     public LocalDate getDueDate() {
-        if (borrowedDate != null) {
-            return borrowedDate.plusDays(14);
-        }
-        return null;
+        return dueDate;
     }
 
     public boolean isOverdue() {
