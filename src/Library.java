@@ -7,7 +7,7 @@ public class Library {
     private final ArrayList<Loan> loanList = new ArrayList<>();
     LoanPolicy loanPolicy;
 
-    public Library (LoanPolicy loanPolicy){
+    public Library(LoanPolicy loanPolicy) {
         this.loanPolicy = loanPolicy;
     }
 
@@ -46,11 +46,12 @@ public class Library {
             if (loan.getResource().identifier.equals(identifier)) {
                 return loan;
             }
-        } return null;
+        }
+        return null;
 
     }
 
-    public LocalDate getDueDate(LocalDate borrowedDate){
+    public LocalDate getDueDate(LocalDate borrowedDate) {
         return loanPolicy.calculateDueDate(borrowedDate);
 
     }
@@ -79,28 +80,34 @@ public class Library {
         }
 
         Loan loan = getLoan(identifier);
-        if (loan != null){
+        if (loan != null) {
             return AttemptLoan.RES_NOT_AVAIL;
         }
-        loanList.add(new Loan(resource, member, LocalDate.now()));
+        if (!loanPolicy.canLoan()) {
+            return AttemptLoan.NOT_PERMITTED;
+        }
+
+        LocalDate borrowedDate = LocalDate.now();
+        LocalDate dueDate = getDueDate(borrowedDate);
+        loanList.add(new Loan(resource, member, borrowedDate, dueDate));
         return AttemptLoan.RES_LOAN_SUCCESS;
     }
 
 
-    public boolean returnResource(String identifier){ //Metode til at fjerne en resource fra loanList
+    public boolean returnResource(String identifier) { //Metode til at fjerne en resource fra loanList
         Loan loan = getLoan(identifier);
-        if (loan == null){
+        if (loan == null) {
             return false;
         }
         loanList.remove(loan);
         return true;
     }
 
-    public ArrayList<Loan> findLoansByMemberId(int memberId){ //Metode til at finde hvilke lån et medlem har.
+    public ArrayList<Loan> findLoansByMemberId(int memberId) { //Metode til at finde hvilke lån et medlem har.
         ArrayList<Loan> foundLoans = new ArrayList<>();
 
-        for (Loan loan : loanList){
-            if (loan.getMember().getID() == memberId){
+        for (Loan loan : loanList) {
+            if (loan.getMember().getID() == memberId) {
                 foundLoans.add(loan);
             }
         }

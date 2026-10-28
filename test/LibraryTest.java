@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LibraryTest {
+    LocalDate borrowedDate;
+    LocalDate dueDate;
+
     ArrayList<Resource> resourceList;
     ArrayList<Member> memberList;
     ArrayList<Loan> loanList;
@@ -24,8 +27,8 @@ public class LibraryTest {
         alma = new Member("alma", 3);
         david = new Member("david", 5);
 
-        akselhp = new Loan(hp,aksel,LocalDate.now());
-        stormLotr = new Loan(lotr, storm, LocalDate.now());
+        akselhp = new Loan(hp,aksel, borrowedDate, dueDate);
+        stormLotr = new Loan(lotr, storm, borrowedDate, dueDate);
 
         resourceList = new ArrayList<>();
         memberList = new ArrayList<>();
