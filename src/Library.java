@@ -20,7 +20,7 @@ public class Library {
     }
 
     public void addLoan(Loan loan) { //Metode til at tilføje lån i loanList ArrayListen
-        loanList.add(loan);
+        loanList.add(loan); 
     }
 
     public Member getMember(int memberId) { //Metode til at finde medlemmer i ArrayListen for medlemmer med brug af memberId
@@ -52,7 +52,7 @@ public class Library {
     }
 
     public LocalDate getDueDate(LocalDate borrowedDate) {
-        return loanPolicy.calculateDueDate(borrowedDate);
+        return loanPolicy.calculateDueDate(borrowedDate,);
 
     }
 
