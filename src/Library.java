@@ -51,8 +51,8 @@ public class Library {
 
     }
 
-    public LocalDate getDueDate(LocalDate borrowedDate) {
-        return loanPolicy.calculateDueDate(borrowedDate,);
+    public LocalDate getDueDate(LocalDate borrowedDate, Resource resource) {
+        return loanPolicy.calculateDueDate(borrowedDate, resource);
 
     }
 
@@ -83,12 +83,12 @@ public class Library {
         if (loan != null) {
             return AttemptLoan.RES_NOT_AVAIL;
         }
-        if (!loanPolicy.canLoan()) {
+        if (!loanPolicy.canLoan(resource, loanList)) {
             return AttemptLoan.NOT_PERMITTED;
         }
 
         LocalDate borrowedDate = LocalDate.now();
-        LocalDate dueDate = getDueDate(borrowedDate);
+        LocalDate dueDate = getDueDate(borrowedDate, resource);
         loanList.add(new Loan(resource, member, borrowedDate, dueDate));
         return AttemptLoan.RES_LOAN_SUCCESS;
     }
