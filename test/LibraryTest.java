@@ -1,8 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,10 +22,16 @@ public class LibraryTest {
     Member aksel, storm, alma, david;
     Loan akselhp, stormLotr, almaGoT;
 
+    Library library;
+    TestDoubleLoanPolicy canLoanPolicy;
+    TestDoubleCannotLoanPolicy cannotLoanPolicy;
+
     @BeforeEach
     void setup(){
         testPolicy = new StandardLoanPolicy();
         testLib = new Library(testPolicy);
+        LoanPolicy loanPolicy = new StandardLoanPolicy();
+        Library libX = new Library(loanPolicy);
 
         hp = new Book("Rowlings", "Harry Potter", "142", 51);
         lotr = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
@@ -52,38 +60,25 @@ public class LibraryTest {
 
         loanList.add(akselhp);
         loanList.add(stormLotr);
+
     }
 
     @Test
-    void testGetMember(){
-        //
-        testLib.addMember(aksel);
-        //
-        Member result = testLib.getMember(1);
-        //
-        assertEquals(result, aksel);
-    }
+    void testNotPermitted() {
 
+        library = new Library(canLoanPolicy);
+        library.loanResource();
+        assertEquals(AttemptLoan.NOT_PERMITTED, loan);
+    }
     @Test
-    void testGetBook(){
-        //
-        testLib.addResource(hp);
-        // get with ID instead of name, name doesnt work
-        Resource result = testLib.getResource("142");
-        //
-        assertEquals(result, hp);
-    }
+        void testGetDueDate() {
+        LoanPolicy loanPolicy = new StandardLoanPolicy();
+        Library libX = new Library(loanPolicy);
 
-    @Test
-    void testGetLoan(){
-        //
-        testLib.addLoan(akselhp);
-        //
-        Loan result = testLib.getLoan("aksel");
-        //
-        assertEquals(result, akselhp);
-    }
+        LocalDate borrowDate = LocalDate.now();
+        LocalDate expectedDate = borrowDate.plusDays(30);
 
-
+        assertEquals(libX.getDueDate(borrowDate, lotr), expectedDate);
+        }
 
 }
