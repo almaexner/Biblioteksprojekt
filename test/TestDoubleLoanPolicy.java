@@ -10,6 +10,6 @@ public class TestDoubleLoanPolicy implements LoanPolicy{
 
     @Override
     public LocalDate calculateDueDate(LocalDate borrowedDate, Resource resource) {
-        return LocalDate.now();
+        return borrowedDate;
     }
 }
