@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,6 +24,9 @@ public class LibraryTest {
 
     @BeforeEach
     void setup(){
+        LoanPolicy loanPolicy = new StandardLoanPolicy();
+        Library libX = new Library(loanPolicy);
+
         hp = new Book("Rowlings", "Harry Potter", "142", 51);
         lotr = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
         goT = new Book("George R.R.", "Game of Thrones", "909", 250);
@@ -61,4 +64,15 @@ public class LibraryTest {
         library.loanResource();
         assertEquals(AttemptLoan.NOT_PERMITTED, loan);
     }
+    @Test
+        void testGetDueDate() {
+        LoanPolicy loanPolicy = new StandardLoanPolicy();
+        Library libX = new Library(loanPolicy);
+
+        LocalDate borrowDate = LocalDate.now();
+        LocalDate expectedDate = borrowDate.plusDays(30);
+
+        assertEquals(libX.getDueDate(borrowDate, lotr), expectedDate);
+        }
+
 }
