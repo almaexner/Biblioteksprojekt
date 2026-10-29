@@ -14,51 +14,59 @@ public class LibraryTest {
     ArrayList<Member> memberList;
     ArrayList<Loan> loanList;
 
-    Book hp, lotr, goT;
-    Member aksel, storm, alma, david;
-    Loan akselhp, stormLotr, almaGoT;
+    Resource[] resourceArray;
+    Member[] memberArray;
+    Loan[] loanArray;
 
-    Library library;
+    Book book1, book2, book3;
+    Member member1, member2, member3, member4;
+    Loan loan1, loan2, almaGoT;
+
+
+    Library canLoanLibra;
+    Library cannotLoanLibrary;
     TestDoubleLoanPolicy canLoanPolicy;
     TestDoubleCannotLoanPolicy cannotLoanPolicy;
 
     @BeforeEach
     void setup(){
-        hp = new Book("Rowlings", "Harry Potter", "142", 51);
-        lotr = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
-        goT = new Book("George R.R.", "Game of Thrones", "909", 250);
+        book1 = new Book("Rowlings", "Harry Potter", "142", 51);
+        book2 = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
+        book3 = new Book("George R.R.", "Game of Thrones", "909", 250);
 
-        aksel = new Member("Aksel", 1);
-        storm = new Member("Storm", 2);
-        alma = new Member("alma", 3);
-        david = new Member("david", 5);
+        member1 = new Member("Aksel", 1);
+        member2 = new Member("Storm", 2);
+        member3 = new Member("alma", 3);
+        member4 = new Member("david", 5);
 
-        akselhp = new Loan(hp,aksel, borrowedDate, dueDate);
-        stormLotr = new Loan(lotr, storm, borrowedDate, dueDate);
+        borrowedDate = LocalDate.now();
+        dueDate = LocalDate.now().plusDays(1);
 
-        resourceList = new ArrayList<>();
-        memberList = new ArrayList<>();
-        loanList = new ArrayList<>();
 
-        resourceList.add(hp);
-        resourceList.add(lotr);
-        resourceList.add(goT);
+        canLoanLibra = new Library(canLoanPolicy);
+        cannotLoanLibrary = new Library(cannotLoanPolicy);
 
-        memberList.add(aksel);
-        memberList.add(storm);
-        memberList.add(alma);
-        memberList.add(david);
 
-        loanList.add(akselhp);
-        loanList.add(stormLotr);
+        canLoanLibra.addResource(book1);
+        canLoanLibra.addResource(book2);
+        canLoanLibra.addResource(book3);
 
+        canLoanLibra.addMember(member1);
+        canLoanLibra.addMember(member2);
+        canLoanLibra.addMember(member3);
+        canLoanLibra.addMember(member4);
+
+        canLoanLibra.addLoan(loan1);
+        canLoanLibra.addLoan(loan2);
     }
 
     @Test
     void testNotPermitted() {
 
-        library = new Library(canLoanPolicy);
-        library.loanResource();
+        loan1 = new Loan(book1, member1, borrowedDate, dueDate);
+        AttemptLoan loan = canLoanLibra.loanResource(member1.getID(), book1.getIdentifier());
+
+
         assertEquals(AttemptLoan.NOT_PERMITTED, loan);
     }
 }
