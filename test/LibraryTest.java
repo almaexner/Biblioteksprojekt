@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +29,7 @@ public class LibraryTest {
     TestDoubleCannotLoanPolicy cannotLoanPolicy;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         testPolicy = new StandardLoanPolicy();
         testLib = new Library(testPolicy);
         LoanPolicy loanPolicy = new StandardLoanPolicy();
@@ -42,7 +44,7 @@ public class LibraryTest {
         alma = new Member("alma", 3);
         david = new Member("david", 5);
 
-        akselhp = new Loan(hp,aksel, borrowedDate, dueDate);
+        akselhp = new Loan(hp, aksel, borrowedDate, dueDate);
         stormLotr = new Loan(lotr, storm, borrowedDate, dueDate);
 
         resourceList = new ArrayList<>();
@@ -70,8 +72,9 @@ public class LibraryTest {
         library.loanResource();
         assertEquals(AttemptLoan.NOT_PERMITTED, loan);
     }
+
     @Test
-        void testGetDueDate() {
+    void testGetDueDate() {
         LoanPolicy loanPolicy = new StandardLoanPolicy();
         Library libX = new Library(loanPolicy);
 
@@ -79,6 +82,37 @@ public class LibraryTest {
         LocalDate expectedDate = borrowDate.plusDays(30);
 
         assertEquals(libX.getDueDate(borrowDate, lotr), expectedDate);
-        }
+    }
+
+
+    @Test
+    void testGetMember(){
+        //
+        testLib.addMember(aksel);
+        //
+        Member result = testLib.getMember(1);
+        //
+        assertEquals(result, aksel);
+    }
+
+    @Test
+    void testGetBook(){
+        //
+        testLib.addResource(hp);
+        // get with ID instead of name, name doesnt work
+        Resource result = testLib.getResource("142");
+        //
+        assertEquals(result, hp);
+    }
+
+    @Test
+    void testGetLoan(){
+        //
+        testLib.addLoan(akselhp);
+        //
+        Loan result = testLib.getLoan("aksel");
+        //
+        assertEquals(result, akselhp);
+    }
 
 }
