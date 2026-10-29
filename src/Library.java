@@ -1,10 +1,11 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Library {
-    private final ArrayList<Resource> resourceList = new ArrayList<>();
-    private final ArrayList<Member> memberList = new ArrayList<>();
-    private final ArrayList<Loan> loanList = new ArrayList<>();
+    private final List<Resource> resourceList = new ArrayList<>();
+    private final List<Member> memberList = new ArrayList<>();
+    private final List<Loan> loanList = new ArrayList<>();
     LoanPolicy loanPolicy;
 
     public Library(LoanPolicy loanPolicy) {
@@ -20,7 +21,7 @@ public class Library {
     }
 
     public void addLoan(Loan loan) { //Metode til at tilføje lån i loanList ArrayListen
-        loanList.add(loan); 
+        loanList.add(loan);
     }
 
     public Member getMember(int memberId) { //Metode til at finde medlemmer i ArrayListen for medlemmer med brug af memberId
@@ -83,7 +84,8 @@ public class Library {
         if (loan != null) {
             return AttemptLoan.RES_NOT_AVAIL;
         }
-        if (!loanPolicy.canLoan(resource, loanList)) {
+        List<Loan> memberLoanList = findLoansByMemberId(memberId);
+        if (!loanPolicy.canLoan(resource, memberLoanList)) {
             return AttemptLoan.NOT_PERMITTED;
         }
 
@@ -103,8 +105,8 @@ public class Library {
         return true;
     }
 
-    public ArrayList<Loan> findLoansByMemberId(int memberId) { //Metode til at finde hvilke lån et medlem har.
-        ArrayList<Loan> foundLoans = new ArrayList<>();
+    public List<Loan> findLoansByMemberId(int memberId) { //Metode til at finde hvilke lån et medlem har.
+        List<Loan> foundLoans = new ArrayList<>();
 
         for (Loan loan : loanList) {
             if (loan.getMember().getID() == memberId) {

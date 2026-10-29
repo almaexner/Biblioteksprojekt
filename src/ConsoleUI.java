@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public class ConsoleUI {
     private final Library library;
@@ -41,6 +41,7 @@ public class ConsoleUI {
             case USER_NOT_FOUND -> IO.println("This user does not exist");
             case RES_NOT_AVAIL -> IO.println(identifier + "is not currently available");
             case RES_LOAN_SUCCESS -> IO.println(identifier + "has be registered as a loan to " + memberId);
+            case NOT_PERMITTED -> IO.println("Du overskrider lånereglen.");
         }
     }
 
@@ -53,7 +54,7 @@ public class ConsoleUI {
 
     private void showLoans() {
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
-        ArrayList<Loan> memberLoans = library.findLoansByMemberId(memberId);
+        List<Loan> memberLoans = library.findLoansByMemberId(memberId);
         for (Loan loan : memberLoans) {
             IO.println(loan);
         }
