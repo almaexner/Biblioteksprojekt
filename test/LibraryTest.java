@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LibraryTest {
     LocalDate borrowedDate;
     LocalDate dueDate;
@@ -15,6 +17,10 @@ public class LibraryTest {
     Book hp, lotr, goT;
     Member aksel, storm, alma, david;
     Loan akselhp, stormLotr, almaGoT;
+
+    Library library;
+    TestDoubleLoanPolicy canLoanPolicy;
+    TestDoubleCannotLoanPolicy cannotLoanPolicy;
 
     @BeforeEach
     void setup(){
@@ -45,5 +51,14 @@ public class LibraryTest {
 
         loanList.add(akselhp);
         loanList.add(stormLotr);
+
+    }
+
+    @Test
+    void testNotPermitted() {
+
+        library = new Library(canLoanPolicy);
+        library.loanResource();
+        assertEquals(AttemptLoan.NOT_PERMITTED, loan);
     }
 }
