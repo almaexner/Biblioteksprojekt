@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class LibraryTest {
     LocalDate borrowedDate;
     LocalDate dueDate;
@@ -14,6 +16,8 @@ public class LibraryTest {
     ArrayList<Member> memberList;
     ArrayList<Loan> loanList;
 
+    LoanPolicy testPolicy;
+    Library testLib;
     Book hp, lotr, goT;
     Member aksel, storm, alma, david;
     Loan akselhp, stormLotr, almaGoT;
@@ -24,6 +28,8 @@ public class LibraryTest {
 
     @BeforeEach
     void setup(){
+        testPolicy = new StandardLoanPolicy();
+        testLib = new Library(testPolicy);
         LoanPolicy loanPolicy = new StandardLoanPolicy();
         Library libX = new Library(loanPolicy);
 
