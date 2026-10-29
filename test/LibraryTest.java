@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class LibraryTest {
     LocalDate borrowedDate;
     LocalDate dueDate;
@@ -12,12 +14,17 @@ public class LibraryTest {
     ArrayList<Member> memberList;
     ArrayList<Loan> loanList;
 
+    LoanPolicy testPolicy;
+    Library testLib;
     Book hp, lotr, goT;
     Member aksel, storm, alma, david;
     Loan akselhp, stormLotr, almaGoT;
 
     @BeforeEach
     void setup(){
+        testPolicy = new StandardLoanPolicy();
+        testLib = new Library(testPolicy);
+
         hp = new Book("Rowlings", "Harry Potter", "142", 51);
         lotr = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
         goT = new Book("George R.R.", "Game of Thrones", "909", 250);
@@ -46,4 +53,37 @@ public class LibraryTest {
         loanList.add(akselhp);
         loanList.add(stormLotr);
     }
+
+    @Test
+    void testGetMember(){
+        //
+        testLib.addMember(aksel);
+        //
+        Member result = testLib.getMember(1);
+        //
+        assertEquals(result, aksel);
+    }
+
+    @Test
+    void testGetBook(){
+        //
+        testLib.addResource(hp);
+        // get with ID instead of name, name doesnt work
+        Resource result = testLib.getResource("142");
+        //
+        assertEquals(result, hp);
+    }
+
+    @Test
+    void testGetLoan(){
+        //
+        testLib.addLoan(akselhp);
+        //
+        Loan result = testLib.getLoan("aksel");
+        //
+        assertEquals(result, akselhp);
+    }
+
+
+
 }
