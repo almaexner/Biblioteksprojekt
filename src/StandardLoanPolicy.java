@@ -1,9 +1,9 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 public class StandardLoanPolicy implements LoanPolicy{
     @Override
-    public boolean canLoan(Resource resource, ArrayList<Loan> memberLoanList) {
+    public boolean canLoan(Resource resource, List<Loan> memberLoanList) {
 
         return true;
     }

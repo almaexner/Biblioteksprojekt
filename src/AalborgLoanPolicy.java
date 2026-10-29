@@ -1,10 +1,10 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 public class AalborgLoanPolicy implements LoanPolicy {
 
     @Override
-    public boolean canLoan(Resource resource, ArrayList<Loan> memberLoanList) {
+    public boolean canLoan(Resource resource, List<Loan> memberLoanList) {
         if (!(resource instanceof Movie || resource instanceof VideoGame)){
             return true;
         }
