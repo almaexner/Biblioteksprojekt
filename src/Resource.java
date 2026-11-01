@@ -1,12 +1,12 @@
 public class Resource {
     final String creator;
     final String title;
-    final String identifier;
+    final String id;
 
-    public Resource(String creator, String title, String identifier){
+    public Resource(String id, String creator, String title){
         this.creator = creator;
         this.title = title;
-        this.identifier = identifier;
+        this.id = id;
     }
 
     public String getCreator(){
@@ -18,6 +18,6 @@ public class Resource {
     }
 
     public String getIdentifier(){
-        return identifier;
+        return id;
     }
 }

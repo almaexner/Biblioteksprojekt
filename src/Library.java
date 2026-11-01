@@ -35,7 +35,7 @@ public class Library {
 
     public Resource getResource(String identifier) { //Metode til at finde resources i resourceList med identifier
         for (Resource resource : resourceList) {
-            if (resource.identifier.equals(identifier)) {
+            if (resource.id.equals(identifier)) {
                 return resource;
             }
         }
@@ -44,12 +44,20 @@ public class Library {
 
     public Loan getLoan(String identifier) {
         for (Loan loan : loanList) {
-            if (loan.getResource().identifier.equals(identifier)) {
+            if (loan.getResource().id.equals(identifier)) {
                 return loan;
             }
         }
         return null;
 
+    }
+
+    public List<Member> getMemberList() {
+        return memberList;
+    }
+
+    public List<Resource> getResourceList() {
+        return resourceList;
     }
 
     public LocalDate getDueDate(LocalDate borrowedDate, Resource resource) {
@@ -103,6 +111,10 @@ public class Library {
         }
         loanList.remove(loan);
         return true;
+    }
+
+    public List<Loan> getLoanList() {
+        return loanList;
     }
 
     public List<Loan> findLoansByMemberId(int memberId) { //Metode til at finde hvilke lån et medlem har.

@@ -1,4 +1,5 @@
-void main() {
+void main() throws IOException {
+
     LoanPolicy loanPolicy = new StandardLoanPolicy();
     Library library = new Library(loanPolicy);
     ConsoleUI consoleUI = new ConsoleUI(library);
@@ -18,6 +19,17 @@ void main() {
     library.addMember(member1);
     library.addMember(member2);
     library.addMember(member3);
+
+    Path path = Path.of("loans.csv");
+    CsvMapper mapper = new CsvMapper();
+    FileHandler handler = new FileHandler(path, mapper);
+
+    handler.saveMember(library.getMemberList());
+    for (Member member : handler.loadMembers()) {
+        IO.println(member);
+    }
+
+
 
     consoleUI.run();
 }
