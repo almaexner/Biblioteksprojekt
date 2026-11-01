@@ -1,8 +1,12 @@
 public class AudioBook extends Resource{
-    final int lengthMin;
+    private int lengthMin;
 
-    public AudioBook(String creator, String title, String identifier, int lengthMin) {
-        super(creator, title, identifier);
+    public AudioBook(String id, String creator, String title, int lengthMin) {
+        super(id, creator, title);
         this.lengthMin = lengthMin;
+    }
+
+    public int getLengthMin(){
+        return lengthMin;
     }
 }

@@ -1,11 +1,15 @@
 import java.util.Objects;
 
 public class Book extends Resource{
-    final int pages;
+    private int pages;
 
     public Book(String id, String creator, String title, int pages) {
         super(id, creator, title);
         this.pages = pages;
+    }
+
+    public int getPages(){
+        return pages;
     }
 
     @Override
