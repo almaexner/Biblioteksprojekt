@@ -42,27 +42,19 @@ public class LibraryTest {
 
     }
 
-    private void addDefaultToLib(){
-        testLib.addResource(hp);
-        testLib.addResource(lotr);
-        testLib.addResource(goT);
+    private void addDefaultToLib(Library lib){
+        lib.addResource(hp);
+        lib.addResource(lotr);
+        lib.addResource(goT);
 
-        testLib.addMember(aksel);
-        testLib.addMember(storm);
-        testLib.addMember(alma);
-        testLib.addMember(david);
+        lib.addMember(aksel);
+        lib.addMember(storm);
+        lib.addMember(alma);
+        lib.addMember(david);
 
-        testLib.addLoan(akselhp);
-        testLib.addLoan(stormLotr);
+        lib.addLoan(akselhp);
+        lib.addLoan(stormLotr);
     }
-
-//    @Test
-//    void testNotPermitted() {
-//
-//        library = new Library(canLoanPolicy);
-//        library.loanResource();
-//        assertEquals(AttemptLoan.NOT_PERMITTED, loan);
-//    }
 
     @Test
     void testGetDueDate() {
