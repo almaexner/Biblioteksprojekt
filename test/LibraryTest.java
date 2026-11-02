@@ -6,23 +6,15 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class LibraryTest {
     LocalDate borrowedDate;
     LocalDate dueDate;
-
-    ArrayList<Resource> resourceList;
-    ArrayList<Member> memberList;
-    ArrayList<Loan> loanList;
 
     LoanPolicy testPolicy;
     Library testLib;
     Book hp, lotr, goT;
     Member aksel, storm, alma, david;
-    Loan akselhp, stormLotr, almaGoT;
+    Loan akselhp, stormLotr;
 
     Library library;
     TestDoubleLoanPolicy canLoanPolicy;
@@ -35,9 +27,9 @@ public class LibraryTest {
         LoanPolicy loanPolicy = new StandardLoanPolicy();
         Library libX = new Library(loanPolicy);
 
-        hp = new Book("Rowlings", "Harry Potter", "142", 51);
-        lotr = new Book("J.R. Tolkien", "Lord of the rings", "123", 19201);
-        goT = new Book("George R.R.", "Game of Thrones", "909", 250);
+        hp = new Book("142", "Rowlings", "Harry Potter", 51);
+        lotr = new Book("123", "J.R. Tolkien", "Lord of the rings", 19201);
+        goT = new Book("909", "George R.R.", "Game of Thrones", 250);
 
         aksel = new Member("Aksel", 1);
         storm = new Member("Storm", 2);
@@ -47,22 +39,21 @@ public class LibraryTest {
         akselhp = new Loan(hp, aksel, borrowedDate, dueDate);
         stormLotr = new Loan(lotr, storm, borrowedDate, dueDate);
 
-        resourceList = new ArrayList<>();
-        memberList = new ArrayList<>();
-        loanList = new ArrayList<>();
 
-        resourceList.add(hp);
-        resourceList.add(lotr);
-        resourceList.add(goT);
+    }
 
-        memberList.add(aksel);
-        memberList.add(storm);
-        memberList.add(alma);
-        memberList.add(david);
+    private void addDefaultToLib(){
+        testLib.addResource(hp);
+        testLib.addResource(lotr);
+        testLib.addResource(goT);
 
-        loanList.add(akselhp);
-        loanList.add(stormLotr);
+        testLib.addMember(aksel);
+        testLib.addMember(storm);
+        testLib.addMember(alma);
+        testLib.addMember(david);
 
+        testLib.addLoan(akselhp);
+        testLib.addLoan(stormLotr);
     }
 
 //    @Test
@@ -92,7 +83,7 @@ public class LibraryTest {
         //
         Member result = testLib.getMember(1);
         //
-        assertEquals(result, aksel);
+        assertEquals(aksel, result);
     }
 
     @Test
@@ -100,19 +91,48 @@ public class LibraryTest {
         //
         testLib.addResource(hp);
         // get with ID instead of name, name doesnt work
-        Resource result = testLib.getResource("142");
+        Book result = (Book) testLib.getResource("142");
         //
-        assertEquals(result, hp);
+        assertEquals(hp, result);
     }
 
-//    @Test
-//    void testGetLoan(){
-//        //
-//        testLib.addLoan(akselhp);
-//        //
-//        Loan result = testLib.getLoan("aksel");
-//        //
-//        assertEquals(result, akselhp);
-//    }
+    @Test
+    void testGetLoan(){
+        //
+        testLib.addLoan(akselhp);
+        //
+        Loan result = testLib.getLoan("aksel");
+        //
+        assertEquals(result, akselhp);
+    }
 
+    @Test
+    void addMemberGetMember(){
+        Member inMember = new Member("test", 0);
+        testLib.addMember(inMember);
+
+        Member outMember = testLib.getMember(0);
+        assertEquals(inMember, outMember);
+    }
+
+    @Test
+    void addBookGetBook(){
+        Book inBook = new Book("testID", "Carl Stefansen","testBook", 12);
+        testLib.addResource(inBook);
+
+        Book outBook = (Book) testLib.getResource("testID");
+        assertEquals(inBook, outBook);
+    }
+
+    @Test
+    void addLoanGetLoan(){
+        Book inBook = new Book("testID", "Carl Stefansen","testBook", 12);
+        Member inMember = new Member("test", 0);
+
+        Loan inLoan = new Loan(inBook, inMember, LocalDate.now(), LocalDate.now().plusWeeks(2));
+        testLib.addLoan(inLoan);
+
+        Loan outLoan = testLib.getLoan(inBook.id);
+        assertEquals(inLoan, outLoan);
+    }
 }

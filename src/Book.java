@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Book extends Resource implements Comparable<Book>{
+public class Book extends Resource{
     private int pages;
 
     public Book(String id, String creator, String title, int pages) {
@@ -24,10 +24,10 @@ public class Book extends Resource implements Comparable<Book>{
         return Objects.equals(creator, book.creator) && Objects.equals(title, book.title) && Objects.equals(id, book.id);
     }
 
-    @Override
+    /*@Override
     public int compareTo(Object obj) {
         Book other = (Book)obj;
         return String.compare(this.title, other.title);
-    }
+    }*/
 }
 
