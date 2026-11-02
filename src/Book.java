@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Book extends Resource implements Comparable<Book>{
+public class Book extends Resource implements Comparable<Book> {
     private int pages;
 
     public Book(String id, String creator, String title, int pages) {
@@ -8,26 +8,25 @@ public class Book extends Resource implements Comparable<Book>{
         this.pages = pages;
     }
 
-    public int getPages(){
+    public int getPages() {
         return pages;
     }
 
     @Override
     public String toString() {
-        return id + ", " + creator + "; " + title + "; " + "nr. of pages: " + pages;
+        return getIdentifier() + ", " + getCreator() + "; " + getTitle() + "; " + "nr. of pages: " + getPages();
     }
 
     @Override
-    public boolean equals(Object otherObj){
+    public boolean equals(Object otherObj) {
         if (otherObj == null || getClass() != otherObj.getClass()) return false;
         Book book = (Book) otherObj;
-        return Objects.equals(creator, book.creator) && Objects.equals(title, book.title) && Objects.equals(id, book.id);
+        return Objects.equals(getCreator(), book.getCreator()) && Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getIdentifier(), book.getIdentifier());
     }
 
     @Override
-    public int compareTo(Object obj) {
-        Book other = (Book)obj;
-        return String.compare(this.title, other.title);
+    public int compareTo(Book otherBook) {
+        return this.getIdentifier().compareTo(otherBook.getIdentifier());
     }
 }
 

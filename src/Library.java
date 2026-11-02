@@ -26,7 +26,7 @@ public class Library {
 
     public Member getMember(int memberId) { //Metode til at finde medlemmer i ArrayListen for medlemmer med brug af memberId
         for (Member member : memberList) {
-            if (member.getID() == memberId) {
+            if (member.getId() == memberId) {
                 return member;
             }
         }
@@ -35,7 +35,7 @@ public class Library {
 
     public Resource getResource(String identifier) { //Metode til at finde resources i resourceList med identifier
         for (Resource resource : resourceList) {
-            if (resource.id.equals(identifier)) {
+            if (resource.getIdentifier().equals(identifier)) {
                 return resource;
             }
         }
@@ -44,7 +44,7 @@ public class Library {
 
     public Loan getLoan(String identifier) {
         for (Loan loan : loanList) {
-            if (loan.getResource().id.equals(identifier)) {
+            if (loan.getResource().getIdentifier().equals(identifier)) {
                 return loan;
             }
         }
@@ -121,7 +121,7 @@ public class Library {
         List<Loan> foundLoans = new ArrayList<>();
 
         for (Loan loan : loanList) {
-            if (loan.getMember().getID() == memberId) {
+            if (loan.getMember().getId() == memberId) {
                 foundLoans.add(loan);
             }
         }

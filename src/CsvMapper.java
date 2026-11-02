@@ -11,7 +11,7 @@ public class CsvMapper {
 
     public String memberToCsv(Member member) {
         return member.getName()
-                + delimiter + member.getID();
+                + delimiter + member.getId();
     }
 
     public Book csvToBook(String line) {
@@ -31,7 +31,7 @@ public class CsvMapper {
                 + delimiter + book.getPages();
     }
 
-    public AudioBook csvToAudioBook(String line){
+    public AudioBook csvToAudioBook(String line) {
         String[] tokens = line.split(delimiter, -1);
         String id = tokens[0];
         String creator = tokens[1];
@@ -41,7 +41,7 @@ public class CsvMapper {
         return new AudioBook(id, creator, title, lengthMin);
     }
 
-    public String audioBookToCsv(AudioBook audioBook){
+    public String audioBookToCsv(AudioBook audioBook) {
         return audioBook.getIdentifier()
                 + delimiter + audioBook.getCreator()
                 + delimiter + audioBook.getTitle()
@@ -67,7 +67,7 @@ public class CsvMapper {
                 + delimiter + movie.getLengthMin();
     }
 
-    public VideoGame csvToVideoGame(String line){
+    public VideoGame csvToVideoGame(String line) {
         String[] tokens = line.split(delimiter, -1);
         String id = tokens[0];
         String creator = tokens[1];
@@ -77,7 +77,7 @@ public class CsvMapper {
         return new VideoGame(id, creator, title, platform);
     }
 
-    public String videoGameToCsv(VideoGame videoGame){
+    public String videoGameToCsv(VideoGame videoGame) {
         return videoGame.getIdentifier()
                 + delimiter + videoGame.getCreator()
                 + delimiter + videoGame.getTitle()
