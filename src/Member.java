@@ -1,4 +1,4 @@
-public class Member {
+public class Member implements Comparable<Member> {
     private final String name;
     private final int id;
 
@@ -13,6 +13,11 @@ public class Member {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int compareTo(Member otherMember){
+        return Integer.compare(this.id, otherMember.id);
     }
 
     public String toString() {

@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Loan {
+public class Loan implements Comparable<Loan> {
     private final Resource resource;
     private final Member member;
     private final LocalDate borrowedDate; //Dagen materialet bliver lånt
@@ -21,12 +21,21 @@ public class Loan {
         return member;
     }
 
+    public LocalDate getBorrowedDate(){
+        return borrowedDate;
+    }
+
     public LocalDate getDueDate() {
         return dueDate;
     }
 
     public boolean isOverdue() {
         return LocalDate.now().isAfter(getDueDate());
+    }
+
+    @Override
+    public int compareTo(Loan otherLoan){
+        return this.getDueDate().compareTo(otherLoan.getDueDate());
     }
 
     public String toString() {
