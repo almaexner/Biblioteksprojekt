@@ -35,7 +35,7 @@ public class LoanTest {
 
         //Assert
         assertEquals("Alma Exner", loan.getMember().getName());
-        assertEquals(10, loan.getMember().getID());
+        assertEquals(10, loan.getMember().getId());
     }
 
     @Test

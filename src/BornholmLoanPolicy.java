@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class BornholmLoanPolicy implements LoanPolicy{
+public class BornholmLoanPolicy implements LoanPolicy {
 
     @Override
     public boolean canLoan(Resource resource, List<Loan> memberLoanList) {
@@ -12,7 +12,7 @@ public class BornholmLoanPolicy implements LoanPolicy{
 
     @Override
     public LocalDate calculateDueDate(LocalDate borrowedDate, Resource resource) {
-        if (resource instanceof AudioBook){
+        if (resource instanceof AudioBook) {
             return borrowedDate.plusDays(14);
         }
         if (borrowedDate != null) {

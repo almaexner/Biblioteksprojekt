@@ -116,7 +116,7 @@ public class FileHandler {
     }
 
     public List<VideoGame> loadVideoGame() throws IOException {
-        try(BufferedReader bufferedReader = Files.newBufferedReader(path)) {
+        try (BufferedReader bufferedReader = Files.newBufferedReader(path)) {
             List<VideoGame> videoGames = new ArrayList<>();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
