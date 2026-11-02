@@ -127,4 +127,9 @@ public class LibraryTest {
         Loan outLoan = testLib.getLoan(inBook.id);
         assertEquals(inLoan, outLoan);
     }
+
+    @Test
+    void attempLoanUsrNotFound(){
+
+    }
 }
