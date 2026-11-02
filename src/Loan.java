@@ -17,6 +17,10 @@ public class Loan {
         return resource;
     }
 
+    public LocalDate getBorrowedDate() {
+        return borrowedDate;
+    }
+
     public Member getMember() {
         return member;
     }

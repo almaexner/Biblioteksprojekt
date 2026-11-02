@@ -66,6 +66,16 @@ public class FileHandler {
         }
     }
 
+    public void saveLoan(List<Loan> loanList) throws IOException {
+        try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path)) {
+            for (Loan loan : loanList) {
+                String line = mapper.loanToCsv(loan);
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+        }
+    }
+
 
     // LOADERS
     public List<Member> loadMembers() throws IOException {
@@ -85,7 +95,6 @@ public class FileHandler {
             List<Book> books = new ArrayList<>();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                // I will make this glorious later!
                 books.add(mapper.csvToBook(line));
             }
             return books;
@@ -125,6 +134,19 @@ public class FileHandler {
             return videoGames;
         }
     }
+
+    public List<Loan> loadLoans() throws IOException {
+        try(BufferedReader bufferedReader = Files.newBufferedReader(path)) {
+            List<Loan> loans = new ArrayList<>();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                loans.add(mapper.csvToLoan(line));
+            }
+            return loans;
+        }
+    }
+
+
 }
 
 
