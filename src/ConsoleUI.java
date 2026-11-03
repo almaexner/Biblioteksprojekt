@@ -14,7 +14,7 @@ public class ConsoleUI {
             int userInput = Integer.parseInt(IO.readln("Indtast dit valg:"));
             switch (userInput) {
                 case 1 -> borrowResource();
-                case 2 -> returnMaterial();
+                case 2 -> returnResource();
                 case 3 -> showLoans();
                 case 4 -> createUser();
                 case 0 -> isRunning = false;
@@ -45,7 +45,7 @@ public class ConsoleUI {
         }
     }
 
-    private void returnMaterial() {
+    private void returnResource() {
         String identifier = IO.readln("Indtast materialets ID: ");
         boolean succesReturn = library.returnResource(identifier);
 
