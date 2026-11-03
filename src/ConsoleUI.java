@@ -17,6 +17,7 @@ public class ConsoleUI {
                 case 2 -> returnResource();
                 case 3 -> showLoans();
                 case 4 -> createUser();
+                case 5 -> displayMembers();
                 case 0 -> isRunning = false;
                 default -> IO.println("Ugyldigt input. Prøv igen.");
             }
@@ -28,7 +29,9 @@ public class ConsoleUI {
                 "1. Lån \n" +
                 "2. Aflever \n" +
                 "3. Vis alle lån \n" +
-                "4. NewUser \n" +
+                "4. Opret Ny Bruger \n" +
+                "5. Vis alle brugere \n" +
+                "6. Vis alle Resourcer \n" +
                 "0. Afslut \n");
     }
 
@@ -63,5 +66,17 @@ public class ConsoleUI {
     public void createUser() {
         Member member = new Member(IO.readln("New Username: "), Integer.parseInt(IO.readln("New userID: ")));
         library.addMember(member);
+    }
+
+    public void displayMembers() { //Metode til at printe members fra memberList
+        for (Member member : library.getMemberList()) {
+            IO.println(member.getId()+ ", " + member.getId());
+        }
+    }
+
+    public void displayResources() { //Metode til at printe members fra memberList
+        for (Resource resource : library.getResourceList()) {
+            IO.println(resource.getCreator()+ ", " + resource.getTitle()+ ", "+ resource.getIdentifier());
+        }
     }
 }
