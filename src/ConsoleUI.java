@@ -39,7 +39,6 @@ public class ConsoleUI {
     }
 
     private void borrowResource() {
-        displayBooks();
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
         String identifier = IO.readln("Indtast materialets ID: ");
         AttemptLoan loanAttempt = library.loanResource(memberId, identifier);

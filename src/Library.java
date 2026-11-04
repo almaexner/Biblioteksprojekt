@@ -61,18 +61,6 @@ public class Library {
 
     }
 
-    public void printBooks() { //Metode til at printe resources fra resourceList
-        for (Resource resource : resourceList) {
-            IO.println(resource);
-        }
-    }
-
-    public void printMembers() { //Metode til at printe members fra memberList
-        for (Member member : memberList) {
-            IO.println(member);
-        }
-    }
-
     public AttemptLoan loanResource(int memberId, String identifier) { //Metode til at låne en resource, hvis både medlem og resource er oprrettet i ArrayListerne
         // og resourcen ikke er på låne listen i forvejen.
         Member member = getMember(memberId);
