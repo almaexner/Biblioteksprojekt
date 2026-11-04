@@ -1,7 +1,10 @@
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 
 public class ConsoleUI {
     private final Library library;
+    private final Collator collator = Collator.getInstance(new Locale("da"));
 
     public ConsoleUI(Library library) {
         this.library = library;
