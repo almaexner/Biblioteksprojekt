@@ -1,7 +1,10 @@
+import java.text.Collator;
 import java.util.List;
+import java.util.Locale;
 
 public class ConsoleUI {
     private final Library library;
+    private final Collator collator = Collator.getInstance(new Locale("da"));
 
     public ConsoleUI(Library library) {
         this.library = library;
@@ -36,14 +39,17 @@ public class ConsoleUI {
     }
 
     private void borrowResource() {
+        displayBooks();
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
         String identifier = IO.readln("Indtast materialets ID: ");
         AttemptLoan loanAttempt = library.loanResource(memberId, identifier);
+        Member member = library.getMember(memberId);
+        Resource resource = library.getResource(identifier);
         switch (loanAttempt) {
             case RES_NOT_FOUND -> IO.println("Not found");
             case USER_NOT_FOUND -> IO.println("This user does not exist");
-            case RES_NOT_AVAIL -> IO.println(identifier + "is not currently available");
-            case RES_LOAN_SUCCESS -> IO.println(identifier + "has be registered as a loan to " + memberId);
+            case RES_NOT_AVAIL -> IO.println(resource.getTitle() + " is not currently available");
+            case RES_LOAN_SUCCESS -> IO.println(resource.getTitle() + " has be registered as a loan to " + member.getName());
             case NOT_PERMITTED -> IO.println("Du overskrider lånereglen.");
         }
     }
@@ -64,7 +70,15 @@ public class ConsoleUI {
     }
 
     public void createUser() {
-        Member member = new Member(IO.readln("New Username: "), Integer.parseInt(IO.readln("New userID: ")));
+        String usrName = IO.readln("New Username: ");
+        int membId = Integer.parseInt(IO.readln("New userID: "));
+
+        if(library.getMember(membId) != null){ // This is a naive solution and makes other members vulnerable towards a malicious person using their userID to loan or return books. But it is better than users overlaying eachother.
+            IO.println("userID already in use");
+            return;
+        }
+
+        Member member = new Member(usrName, membId);
         library.addMember(member);
     }
 

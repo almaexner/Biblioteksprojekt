@@ -1,4 +1,4 @@
-public class AudioBook extends Resource implements Comparable<AudioBook> {
+public class AudioBook extends Resource {
     private final int lengthMin;
 
     public AudioBook(String id, String creator, String title, int lengthMin) {
@@ -11,7 +11,7 @@ public class AudioBook extends Resource implements Comparable<AudioBook> {
     }
 
     @Override
-    public int compareTo(AudioBook otherAudioBook) {
-        return this.getIdentifier().compareTo(otherAudioBook.getIdentifier());
+    public String toString() {
+        return getIdentifier() + ", " + getCreator() + "; " + getTitle() + "; " + "lenght: " + getLengthMin() + "min";
     }
 }

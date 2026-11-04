@@ -1,4 +1,4 @@
-public class Movie extends Resource implements Comparable<Movie> {
+public class Movie extends Resource {
     private final String instructor;
     private final int lengthMin;
 
@@ -17,7 +17,7 @@ public class Movie extends Resource implements Comparable<Movie> {
     }
 
     @Override
-    public int compareTo(Movie otherMovie) {
-        return this.getIdentifier().compareTo(otherMovie.getIdentifier());
+    public String toString() {
+        return getIdentifier() + ", " + getCreator() + "; " + getTitle() + "; " + getInstructor() + "; "  + "lenght: " + getLengthMin() + "min";
     }
 }

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class CsvMapper {
     private String delimiter = ",";
 
@@ -82,6 +84,29 @@ public class CsvMapper {
                 + delimiter + videoGame.getCreator()
                 + delimiter + videoGame.getTitle()
                 + delimiter + videoGame.getPlatform();
+    }
+
+    public Loan csvToLoan(String line, Library library) {
+        String[] tokens = line.split(delimiter, -1);
+        int memberId = Integer.parseInt(tokens[0]);
+        String resourceId = tokens[1];
+        LocalDate borrowedDate = LocalDate.parse(tokens[2]);
+        LocalDate dueDate = LocalDate.parse(tokens[3]);
+
+        Member member = library.getMember(memberId);
+        Resource resource = library.getResource(resourceId);
+
+        if (member == null || resource == null) {
+            throw new IllegalArgumentException("Ukendt medlem eller materiale: " + line);
+        }
+        return new Loan(resource, member, borrowedDate, dueDate);
+    }
+
+    public String loanToCsv(Loan loan) {
+        return loan.getMember().getId()
+                + delimiter + loan.getResource().getIdentifier()
+                + delimiter + loan.getBorrowedDate()
+                + delimiter + loan.getDueDate();
     }
 }
 
