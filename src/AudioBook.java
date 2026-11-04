@@ -9,4 +9,9 @@ public class AudioBook extends Resource {
     public int getLengthMin() {
         return lengthMin;
     }
+
+    @Override
+    public String toString() {
+        return getIdentifier() + ", " + getCreator() + "; " + getTitle() + "; " + "lenght: " + getLengthMin() + "min";
+    }
 }

@@ -40,11 +40,13 @@ public class ConsoleUI {
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
         String identifier = IO.readln("Indtast materialets ID: ");
         AttemptLoan loanAttempt = library.loanResource(memberId, identifier);
+        Member member = library.getMember(memberId);
+        Resource resource = library.getResource(identifier);
         switch (loanAttempt) {
             case RES_NOT_FOUND -> IO.println("Not found");
             case USER_NOT_FOUND -> IO.println("This user does not exist");
-            case RES_NOT_AVAIL -> IO.println(identifier + " is not currently available");
-            case RES_LOAN_SUCCESS -> IO.println(identifier + " has be registered as a loan to " + memberId);
+            case RES_NOT_AVAIL -> IO.println(resource.getTitle() + " is not currently available");
+            case RES_LOAN_SUCCESS -> IO.println(resource.getTitle() + " has be registered as a loan to " + member.getName());
             case NOT_PERMITTED -> IO.println("Du overskrider lånereglen.");
         }
     }

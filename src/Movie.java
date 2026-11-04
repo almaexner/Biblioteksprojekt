@@ -15,4 +15,9 @@ public class Movie extends Resource {
     public int getLengthMin() {
         return lengthMin;
     }
+
+    @Override
+    public String toString() {
+        return getIdentifier() + ", " + getCreator() + "; " + getTitle() + "; " + getInstructor() + "; "  + "lenght: " + getLengthMin() + "min";
+    }
 }
