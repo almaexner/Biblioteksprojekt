@@ -17,9 +17,10 @@ public class ConsoleUI {
             int userInput = Integer.parseInt(IO.readln("Indtast dit valg:"));
             switch (userInput) {
                 case 1 -> borrowResource();
-                case 2 -> returnMaterial();
+                case 2 -> returnResource();
                 case 3 -> showLoans();
                 case 4 -> createUser();
+                case 5 -> displayMembers();
                 case 0 -> isRunning = false;
                 default -> IO.println("Ugyldigt input. Prøv igen.");
             }
@@ -31,7 +32,9 @@ public class ConsoleUI {
                 "1. Lån \n" +
                 "2. Aflever \n" +
                 "3. Vis alle lån \n" +
-                "4. NewUser \n" +
+                "4. Opret Ny Bruger \n" +
+                "5. Vis alle brugere \n" +
+                "6. Vis alle Resourcer \n" +
                 "0. Afslut \n");
     }
 
@@ -51,19 +54,7 @@ public class ConsoleUI {
         }
     }
 
-    private void displayBooks(){
-        library.printBooks();
-    }
-
-    private void displayLoanedBooks(int Id){
-        var loans = library.findLoansByMemberId(Id);
-        printLoanList(loans);
-
-    }
-
-    private void returnMaterial() {
-        int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
-        displayLoanedBooks(memberId);
+    private void returnResource() {
         String identifier = IO.readln("Indtast materialets ID: ");
         boolean succesReturn = library.returnResource(identifier);
 
@@ -91,9 +82,15 @@ public class ConsoleUI {
         library.addMember(member);
     }
 
-    private void printLoanList(List<Loan> loanList){
-        for (Loan loan : loanList){
-            IO.println(loan.getResource());
+    public void displayMembers() { //Metode til at printe members fra memberList
+        for (Member member : library.getMemberList()) {
+            IO.println(member.getId()+ ", " + member.getId());
+        }
+    }
+
+    public void displayResources() { //Metode til at printe members fra memberList
+        for (Resource resource : library.getResourceList()) {
+            IO.println(resource.getCreator()+ ", " + resource.getTitle()+ ", "+ resource.getIdentifier());
         }
     }
 }

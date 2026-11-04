@@ -20,10 +20,6 @@ public class Library {
         memberList.add(member);
     }
 
-    public void addLoan(Loan loan) { //Metode til at tilføje lån i loanList ArrayListen
-        loanList.add(loan);
-    }
-
     public Member getMember(int memberId) { //Metode til at finde medlemmer i ArrayListen for medlemmer med brug af memberId
         for (Member member : memberList) {
             if (member.getId() == memberId) {
@@ -63,18 +59,6 @@ public class Library {
     public LocalDate getDueDate(LocalDate borrowedDate, Resource resource) {
         return loanPolicy.calculateDueDate(borrowedDate, resource);
 
-    }
-
-    public void printBooks() { //Metode til at printe resources fra resourceList
-        for (int i = 0; i < resourceList.size(); i++) {
-            IO.println(resourceList.get(i));
-        }
-    }
-
-    public void printMembers() { //Metode til at printe members fra memberList
-        for (int i = 0; i < memberList.size(); i++) {
-            IO.println(memberList.get(i));
-        }
     }
 
     public AttemptLoan loanResource(int memberId, String identifier) { //Metode til at låne en resource, hvis både medlem og resource er oprrettet i ArrayListerne
