@@ -97,7 +97,7 @@ public class LibraryTest {
     @Test
     void testGetLoan(){
         //
-        testLib.addLoan(loan1);
+        testLib.loanResource(loan1.getMember().getId(), loan1.getResource().getIdentifier());
         //
         Loan result = testLib.getLoan(book1.getIdentifier());
         //
@@ -126,12 +126,17 @@ public class LibraryTest {
     void addLoanGetLoan(){
         Book inBook = new Book("testID", "Carl Stefansen","testBook", 12);
         Member inMember = new Member("test", 0);
+        testLib.addResource(inBook);
+        testLib.addMember(inMember);
 
         Loan inLoan = new Loan(inBook, inMember, LocalDate.now(), LocalDate.now().plusWeeks(2));
-        testLib.addLoan(inLoan);
+        IO.println(testLib.loanResource(inMember.getId(), inBook.getIdentifier()));
 
         Loan outLoan = testLib.getLoan(inBook.getIdentifier());
-        assertEquals(inLoan, outLoan);
+        IO.println("Loan created and added via loan resource: "+ inLoan);
+        IO.println();
+        IO.println("Loan from List read" + outLoan);
+        assertEquals(outLoan.getMember().getId(), inLoan.getMember().getId());
     }
 
     @Test
