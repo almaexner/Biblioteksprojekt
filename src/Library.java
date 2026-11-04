@@ -66,14 +66,14 @@ public class Library {
     }
 
     public void printBooks() { //Metode til at printe resources fra resourceList
-        for (int i = 0; i < resourceList.size(); i++) {
-            IO.println(resourceList.get(i));
+        for (Resource resource : resourceList) {
+            IO.println(resource);
         }
     }
 
     public void printMembers() { //Metode til at printe members fra memberList
-        for (int i = 0; i < memberList.size(); i++) {
-            IO.println(memberList.get(i));
+        for (Member member : memberList) {
+            IO.println(member);
         }
     }
 
