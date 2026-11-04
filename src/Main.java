@@ -10,6 +10,8 @@ void main(String[] args) throws IOException {
     FileHandler videoGameFile = new FileHandler(Path.of("videoGames.csv"), mapper);
     FileHandler loanFile = new FileHandler(Path.of("loans.csv"), mapper);
 
+    // A Rough way to do it. Would rather just use relative position from a main path.
+
     //Loader alle lister ved programmets start
     for (Member member : memberFile.loadMembers()) {
         library.addMember(member);
@@ -31,9 +33,13 @@ void main(String[] args) throws IOException {
         library.addResource(videoGame);
     }
 
-    for (Loan loan : loanFile.loadLoan(library)) {
-        library.addLoan(loan);
-    }
+    //for (Loan loan : loanFile.loadLoan(library)) {
+    //    library.addLoan(loan);
+    //}
     ConsoleUI consoleUI = new ConsoleUI(library);
     consoleUI.run();
+
+    memberFile.saveMember(library.getMemberList());
+    loanFile.saveLoan(library.getLoanList());
+    IO.println("Saved");
 }
