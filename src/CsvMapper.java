@@ -88,8 +88,8 @@ public class CsvMapper {
 
     public Loan csvToLoan(String line, Library library) {
         String[] tokens = line.split(delimiter, -1);
-        int memberId = Integer.parseInt(tokens[0]);
-        String resourceId = tokens[1];
+        String resourceId = tokens[0];
+        int memberId = Integer.parseInt(tokens[1]);
         LocalDate borrowedDate = LocalDate.parse(tokens[2]);
         LocalDate dueDate = LocalDate.parse(tokens[3]);
 
