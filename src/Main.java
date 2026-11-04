@@ -31,9 +31,9 @@ void main(String[] args) throws IOException {
         library.addResource(videoGame);
     }
 
-    for (Loan loan : loanFile.loadLoan(library)) {
+    /*for (Loan loan : loanFile.loadLoan(library)) {
         library.addLoan(loan);
-    }
+    }*/
     ConsoleUI consoleUI = new ConsoleUI(library);
     consoleUI.run();
 }

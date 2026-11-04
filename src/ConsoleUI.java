@@ -36,19 +36,30 @@ public class ConsoleUI {
     }
 
     private void borrowResource() {
+        displayBooks();
         int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
         String identifier = IO.readln("Indtast materialets ID: ");
         AttemptLoan loanAttempt = library.loanResource(memberId, identifier);
         switch (loanAttempt) {
             case RES_NOT_FOUND -> IO.println("Not found");
             case USER_NOT_FOUND -> IO.println("This user does not exist");
-            case RES_NOT_AVAIL -> IO.println(identifier + "is not currently available");
-            case RES_LOAN_SUCCESS -> IO.println(identifier + "has be registered as a loan to " + memberId);
+            case RES_NOT_AVAIL -> IO.println(identifier + " is not currently available");
+            case RES_LOAN_SUCCESS -> IO.println(identifier + " has be registered as a loan to " + memberId);
             case NOT_PERMITTED -> IO.println("Du overskrider lånereglen.");
         }
     }
 
+    private void displayBooks(){
+        library.printBooks();
+    }
+
+    private void displayLoanedBooks(int Id){
+        library.findLoansByMemberId(Id);
+    }
+
     private void returnMaterial() {
+        int memberId = Integer.parseInt(IO.readln("Indtast memberID: "));
+        displayLoanedBooks(memberId);
         String identifier = IO.readln("Indtast materialets ID: ");
         boolean succesReturn = library.returnResource(identifier);
 
