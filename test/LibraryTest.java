@@ -140,7 +140,7 @@ public class LibraryTest {
         Library canLoadLib = new Library(testCanLoanPolicy);
         addAllToLib(canLoadLib);
 
-        assertEquals(AttemptLoan.RES_LOAN_SUCCESS, canLoadLib.loanResource(member1.getID(),book1.getIdentifier()));
+        assertEquals(AttemptLoan.RES_LOAN_SUCCESS, canLoadLib.loanResource(member1.getId(),book1.getIdentifier()));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class LibraryTest {
         Library cannotLoadLib = new Library(testCannotLoanPolicy);
         addAllToLib(cannotLoadLib);
 
-        assertEquals(AttemptLoan.NOT_PERMITTED, cannotLoadLib.loanResource(member1.getID(),book1.getIdentifier()));
+        assertEquals(AttemptLoan.NOT_PERMITTED, cannotLoadLib.loanResource(member1.getId(),book1.getIdentifier()));
     }
 
     @Test
@@ -157,7 +157,7 @@ public class LibraryTest {
         addAllToLib(canLoadLib);
         Member testMember = new Member("Martin", 10000);
 
-        assertEquals(AttemptLoan.USER_NOT_FOUND, canLoadLib.loanResource(testMember.getID(),book1.getIdentifier()));
+        assertEquals(AttemptLoan.USER_NOT_FOUND, canLoadLib.loanResource(testMember.getId(),book1.getIdentifier()));
     }
 
     @Test
@@ -166,15 +166,15 @@ public class LibraryTest {
         addAllToLib(canLoadLib);
         Book testBook = new Book("00", "Martin", "Kewl", 1);
 
-        assertEquals(AttemptLoan.RES_NOT_FOUND, canLoadLib.loanResource(member1.getID(),testBook.getIdentifier()));
+        assertEquals(AttemptLoan.RES_NOT_FOUND, canLoadLib.loanResource(member1.getId(),testBook.getIdentifier()));
     }
 
     @Test
     void attempLoanNotAvailable(){
         Library canLoadLib = new Library(testCanLoanPolicy);
         addAllToLib(canLoadLib);
-        canLoadLib.loanResource(member2.getID(),book1.getIdentifier());
+        canLoadLib.loanResource(member2.getId(),book1.getIdentifier());
 
-        assertEquals(AttemptLoan.RES_NOT_AVAIL, canLoadLib.loanResource(member1.getID(),book1.getIdentifier()));
+        assertEquals(AttemptLoan.RES_NOT_AVAIL, canLoadLib.loanResource(member1.getId(),book1.getIdentifier()));
     }
 }
