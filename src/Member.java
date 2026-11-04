@@ -1,3 +1,5 @@
+import java.text.Collator;
+
 public class Member implements Comparable<Member> {
     private final String name;
     private final int id;
