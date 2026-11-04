@@ -2,7 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -89,7 +88,7 @@ public class LibraryTest {
     void testGetBook(){
         //
         testLib.addResource(book1);
-        // get with ID instead of name, name doesnt work
+        // get with ID instead of name, name doesn't work
         Book result = (Book) testLib.getResource("142");
         //
         assertEquals(book1, result);
@@ -131,7 +130,7 @@ public class LibraryTest {
         Loan inLoan = new Loan(inBook, inMember, LocalDate.now(), LocalDate.now().plusWeeks(2));
         testLib.addLoan(inLoan);
 
-        Loan outLoan = testLib.getLoan(inBook.id);
+        Loan outLoan = testLib.getLoan(inBook.getIdentifier());
         assertEquals(inLoan, outLoan);
     }
 
