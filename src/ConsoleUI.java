@@ -56,7 +56,9 @@ public class ConsoleUI {
     }
 
     private void displayLoanedBooks(int Id){
-        library.findLoansByMemberId(Id);
+        var loans = library.findLoansByMemberId(Id);
+        printLoanList(loans);
+
     }
 
     private void returnMaterial() {
@@ -77,7 +79,21 @@ public class ConsoleUI {
     }
 
     public void createUser() {
-        Member member = new Member(IO.readln("New Username: "), Integer.parseInt(IO.readln("New userID: ")));
+        String usrName = IO.readln("New Username: ");
+        int membId = Integer.parseInt(IO.readln("New userID: "));
+
+        if(library.getMember(membId) != null){
+            IO.println("userID already in use");
+            return;
+        }
+
+        Member member = new Member(usrName, membId);
         library.addMember(member);
+    }
+
+    private void printLoanList(List<Loan> loanList){
+        for (Loan loan : loanList){
+            IO.println(loan.getResource());
+        }
     }
 }
