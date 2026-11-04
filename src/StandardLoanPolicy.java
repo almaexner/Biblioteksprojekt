@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class StandardLoanPolicy implements LoanPolicy{
+public class StandardLoanPolicy implements LoanPolicy {
     @Override
     public boolean canLoan(Resource resource, List<Loan> memberLoanList) {
 

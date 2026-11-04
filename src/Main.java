@@ -4,9 +4,9 @@ void main() throws IOException {
     Library library = new Library(loanPolicy);
     ConsoleUI consoleUI = new ConsoleUI(library);
 
-    Book book1 = new Book("101","Allan B. Downey", "Think Java", 120);
-    Book book2 = new Book("102","J.K. Rowling", "Harry Potter and the philosophers stone", 317);
-    Book book3 = new Book("103","Paulo Coelho", "The alchemist", 274);
+    Book book1 = new Book("101", "Allan B. Downey", "Think Java", 120);
+    Book book2 = new Book("102", "J.K. Rowling", "Harry Potter and the philosophers stone", 317);
+    Book book3 = new Book("103", "Paulo Coelho", "The alchemist", 274);
 
     Member member1 = new Member("Alma Exner", 10);
     Member member2 = new Member("Hans Hansen", 11);

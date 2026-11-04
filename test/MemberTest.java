@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -33,7 +32,7 @@ public class MemberTest {
         //Act
 
         //Assert
-        assertTrue(10 == member1.getID());
+        assertTrue(10 == member1.getId());
     }
 
     @Test
@@ -43,7 +42,7 @@ public class MemberTest {
         //Act
 
         //Assert
-        assertTrue(0 == member1.getID());
+        assertTrue(0 == member1.getId());
     }
 
     @Test
@@ -53,7 +52,7 @@ public class MemberTest {
         //Act
 
         //Assert
-        assertEquals(member1.getName() + " (Lånernummer: " + member1.getID() + ")", member1.toString());
+        assertEquals(member1.getName() + " (Lånernummer: " + member1.getId() + ")", member1.toString());
 
     }
 
@@ -65,7 +64,7 @@ public class MemberTest {
         //Act
 
         //Assert
-        assertEquals(member1.getName() + " (Lånernummer: " + member1.getID() + ")", member2.toString());
+        assertEquals(member1.getName() + " (Lånernummer: " + member1.getId() + ")", member2.toString());
 
     }
 

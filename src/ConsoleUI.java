@@ -59,6 +59,7 @@ public class ConsoleUI {
             IO.println(loan);
         }
     }
+
     public void createUser() {
         Member member = new Member(IO.readln("New Username: "), Integer.parseInt(IO.readln("New userID: ")));
         library.addMember(member);
