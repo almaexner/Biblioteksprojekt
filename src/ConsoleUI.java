@@ -82,7 +82,7 @@ public class ConsoleUI {
         String usrName = IO.readln("New Username: ");
         int membId = Integer.parseInt(IO.readln("New userID: "));
 
-        if(library.getMember(membId) != null){
+        if(library.getMember(membId) != null){ // This is a naive solution and makes other members vulnerable towards a malicious person using their userID to loan or return books. But it is better than users overlaying eachother.
             IO.println("userID already in use");
             return;
         }
