@@ -29,6 +29,10 @@ public class Library {
         return null;
     }
 
+    public void addLoan(Loan loan) { //Metode til at tilføje lån i loanList ArrayListen
+        loanList.add(loan);
+    }
+
     public Resource getResource(String identifier) { //Metode til at finde resources i resourceList med identifier
         for (Resource resource : resourceList) {
             if (resource.getIdentifier().equals(identifier)) {
