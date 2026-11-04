@@ -1,4 +1,4 @@
-public class VideoGame extends Resource implements Comparable<VideoGame> {
+public class VideoGame extends Resource {
     private final String platform;
 
     public VideoGame(String id, String creator, String title, String platform) {
@@ -8,10 +8,5 @@ public class VideoGame extends Resource implements Comparable<VideoGame> {
 
     public String getPlatform() {
         return platform;
-    }
-
-    @Override
-    public int compareTo(VideoGame otherVideoGame) {
-        return this.getIdentifier().compareTo(otherVideoGame.getIdentifier());
     }
 }
