@@ -22,6 +22,8 @@ void main() throws IOException {
     FileHandler videoGameFile = new FileHandler(Path.of("videoGames.csv"), mapper);
     FileHandler loanFile = new FileHandler(Path.of("loans.csv"), mapper);
 
+    // A Rough way to do it. Would rather just use relative position from a main path.
+
     //Loader alle lister ved programmets start
     for (Member member : memberFile.loadMembers()) {
         library.addMember(member);
@@ -55,4 +57,8 @@ public void createFileIfNotExists(Path path) throws IOException {
         Files.createFile(path);
         IO.println("Oprettede fil: " + path);
     }
+
+    memberFile.saveMember(library.getMemberList());
+    loanFile.saveLoan(library.getLoanList());
+    IO.println("Saved");
 }
